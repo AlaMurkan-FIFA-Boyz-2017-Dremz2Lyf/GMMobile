@@ -1,30 +1,49 @@
 import React, { Component } from 'react';
-import { Text, Navigator, TouchableHighlight } from 'react-native';
+import { TabBarIOS, StyleSheet } from 'react-native';
 
-const App = (props) => {
-  const routes = [
-    {title: 'First Scene', index: 0},
-    {title: 'Second Scene', index: 1},
-  ];
+import Stats from './stats';
+import Home from './home';
+import Play from './play';
 
-  return (
-    <Navigator
-      initialRoute={routes[0]}
-      initialRouteStack={routes}
-      renderScene={(route, navigator) =>
-        <TouchableHighlight onPress={() => {
-          if (route.index === 0) {
-            navigator.push(routes[1]);
-          } else {
-            navigator.pop();
-          }
-        }}>
-        <Text>Hello {route.title}!</Text>
-        </TouchableHighlight>
-      }
-      style={{padding: 100}}
-    />
-  );
+import Icon from 'react-native-vector-icons/Ionicons';
+
+class App extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      selectedTab: 'recents'
+    }
+  }
+
+  setTab(selectedTab) {
+    this.setState({selectedTab});
+  }
+
+  render() {
+    return (
+      <TabBarIOS>
+        <TabBarIOS.Item
+          systemIcon='recents'
+          selected={this.state.selectedTab === 'recents'}
+          onPress={() => this.setTab('recents')}>
+          <Home />
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          systemIcon='bookmarks'
+          selected={this.state.selectedTab === 'bookmarks'}
+          onPress={() => this.setTab('bookmarks')}>
+          <Play />
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          systemIcon='more'
+          selected={this.state.selectedTab === 'more'}
+          onPress={() => this.setTab('more')}>
+          <Stats />
+        </TabBarIOS.Item>
+      </TabBarIOS>
+    );
+  }
 };
 
 export default App;
