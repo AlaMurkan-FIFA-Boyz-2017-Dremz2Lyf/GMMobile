@@ -12,7 +12,7 @@ class App extends Component {
     super()
 
     this.state = {
-      selectedTab: 'recents'
+      selectedTab: 'home'
     }
   }
 
@@ -23,12 +23,14 @@ class App extends Component {
   render() {
     return (
       <TabBarIOS>
-        <TabBarIOS.Item
-          systemIcon='recents'
-          selected={this.state.selectedTab === 'recents'}
-          onPress={() => this.setTab('recents')}>
+        <Icon.TabBarItemIOS
+          title='Home'
+          iconName='ios-football-outline'
+          selectedIconName='ios-football'
+          selected={this.state.selectedTab === 'home'}
+          onPress={() => this.setTab('home')}>
           <Home />
-        </TabBarIOS.Item>
+        </Icon.TabBarItemIOS>
         <TabBarIOS.Item
           systemIcon='bookmarks'
           selected={this.state.selectedTab === 'bookmarks'}
